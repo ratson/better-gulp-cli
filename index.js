@@ -10,6 +10,7 @@ var tildify = require('tildify');
 var interpret = require('interpret');
 var v8flags = require('v8flags');
 var findRange = require('semver-greatest-satisfied-range');
+var pkgConf = require('pkg-conf');
 var exit = require('./lib/shared/exit');
 var cliOptions = require('./lib/shared/cliOptions');
 var completion = require('./lib/shared/completion');
@@ -37,6 +38,7 @@ var cli = new Liftoff({
   name: 'gulp',
   completions: completion,
   extensions: interpret.jsVariants,
+  moduleName: pkgConf.sync('gulp-cli')['package'],
   v8flags: v8flags,
   configFiles: {
     '.gulp': {
