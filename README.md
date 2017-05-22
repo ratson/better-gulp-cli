@@ -4,16 +4,41 @@
   </a>
 </p>
 
-# gulp-cli
+# bettter-gulp-cli
 
 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![AppVeyor Build Status][appveyor-image]][appveyor-url] [![Coveralls Status][coveralls-image]][coveralls-url] [![Gitter chat][gitter-image]][gitter-url]
 
 Command Line Utility for Gulp
 
+# This is a fork
+
+Fork from https://github.com/gulpjs/gulp-cli to add ability to
+load user-defined `gulp-cli` package.
+
+Designed for https://www.npmjs.com/package/gulp-v4, but should work for any
+customized versions of `gulp`.
+
+## Installation
+
+```bash
+npm install -g better-gulp-cli
+```
+
 ## Usage
 
 ```bash
 > gulp [flags] <task> <task>...
+```
+
+Use customized version of `gulp`, e.g. `gulp-v4`,
+add the following config to `package.json`,
+
+```json
+{
+  "gulp-cli": {
+    "package": "gulp-v4"
+  }
+}
 ```
 
 ## Custom Metadata
