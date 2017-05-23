@@ -7,7 +7,7 @@ var eraseTime = require('gulp-test-tools').eraseTime;
 var cliVersion = require('../package.json').version;
 var gulpVersion = require('gulp/package.json').version;
 
-describe('flag: --version', function() {
+describe.skip('flag: --version', function() {
 
   it('prints the version of CLI and local gulp', function(done) {
     runner({ verbose: false })

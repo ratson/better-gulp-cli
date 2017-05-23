@@ -12,7 +12,7 @@ var runner = require('gulp-test-tools').gulpRunner({ verbose: false }).basedir(f
 
 describe('config: flags.continue', function() {
 
-  it('Should continue if `flags.continue` is true in .gulp.*',
+  it.skip('Should continue if `flags.continue` is true in .gulp.*',
   function(done) {
     runner
       .chdir('flags/continue/t')
