@@ -11,11 +11,13 @@ var interpret = require('interpret');
 var v8flags = require('v8flags');
 var findRange = require('semver-greatest-satisfied-range');
 var pkgConf = require('pkg-conf');
+const updateNotifier = require('update-notifier');
+
+const pkg = require('./package.json');
 var exit = require('./lib/shared/exit');
 var cliOptions = require('./lib/shared/cliOptions');
 var completion = require('./lib/shared/completion');
 var verifyDeps = require('./lib/shared/verifyDependencies');
-var cliVersion = require('./package.json').version;
 var getBlacklist = require('./lib/shared/getBlacklist');
 var toConsole = require('./lib/shared/log/toConsole');
 
@@ -26,6 +28,10 @@ var mergeConfigToEnvFlags = require('./lib/shared/config/env-flags');
 // Logging functions
 var logVerify = require('./lib/shared/log/verify');
 var logBlacklistError = require('./lib/shared/log/blacklistError');
+
+const cliVersion = pkg.version;
+
+updateNotifier({ pkg }).notify();
 
 // Get supported ranges
 var ranges = fs.readdirSync(__dirname + '/lib/versioned/');
@@ -55,8 +61,7 @@ var cli = new Liftoff({
 });
 
 var usage =
-  '\n' + chalk.bold('Usage:') +
-  ' gulp ' + chalk.blue('[options]') + ' tasks';
+  '\n' + chalk.bold('Usage:') + ' gulp ' + chalk.blue('[options]') + ' tasks';
 
 var parser = yargs.usage(usage, cliOptions);
 var opts = parser.argv;
@@ -80,12 +85,15 @@ cli.on('respawn', function(flags, child) {
 });
 
 function run() {
-  cli.launch({
-    cwd: opts.cwd,
-    configPath: opts.gulpfile,
-    require: opts.require,
-    completion: opts.completion,
-  }, handleArguments);
+  cli.launch(
+    {
+      cwd: opts.cwd,
+      configPath: opts.gulpfile,
+      require: opts.require,
+      completion: opts.completion,
+    },
+    handleArguments
+  );
 }
 
 module.exports = run;
@@ -156,10 +164,7 @@ function handleArguments(env) {
   // we let them chdir as needed
   if (process.cwd() !== env.cwd) {
     process.chdir(env.cwd);
-    log.info(
-      'Working directory changed to',
-      chalk.magenta(tildify(env.cwd))
-    );
+    log.info('Working directory changed to', chalk.magenta(tildify(env.cwd)));
   }
 
   // Find the correct CLI version to run

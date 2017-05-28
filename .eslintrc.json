@@ -1,5 +1,8 @@
 {
   "extends": "gulp",
+  "env":{
+    "es6": true
+  },
   "rules": {
     "max-statements": [1, 40]
   }

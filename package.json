@@ -6,7 +6,7 @@
   "license": "MIT",
   "man": "gulp.1",
   "engines": {
-    "node": ">= 0.10"
+    "node": ">= 6"
   },
   "main": "index.js",
   "bin": {
@@ -45,6 +45,7 @@
     "pretty-hrtime": "^1.0.0",
     "semver-greatest-satisfied-range": "^1.0.0",
     "tildify": "^1.0.0",
+    "update-notifier": "^2.1.0",
     "v8flags": "^2.0.9",
     "wreck": "^6.3.0",
     "yargs": "^3.28.0"
