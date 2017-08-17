@@ -12,6 +12,7 @@ var v8flags = require('v8flags');
 var findRange = require('semver-greatest-satisfied-range');
 var pkgConf = require('pkg-conf');
 const updateNotifier = require('update-notifier');
+const readPkgUp = require('read-pkg-up');
 
 const pkg = require('./package.json');
 var exit = require('./lib/shared/exit');
@@ -40,11 +41,22 @@ var ranges = fs.readdirSync(__dirname + '/lib/versioned/');
 // before anything touches it
 process.env.INIT_CWD = process.cwd();
 
+function getModuleName() {
+  const customPackage = pkgConf.sync('gulp-cli')['package'];
+  if (customPackage) {
+    return customPackage;
+  }
+  const deps = readPkgUp.sync().pkg['devDependencies'] || {};
+  if (deps['gulp-v4']) {
+    return 'gulp-v4';
+  }
+}
+
 var cli = new Liftoff({
   name: 'gulp',
   completions: completion,
   extensions: interpret.jsVariants,
-  moduleName: pkgConf.sync('gulp-cli')['package'],
+  moduleName: getModuleName(),
   v8flags: v8flags,
   configFiles: {
     '.gulp': {
