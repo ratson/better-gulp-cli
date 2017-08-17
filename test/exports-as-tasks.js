@@ -15,16 +15,18 @@ describe('exports as tasks', function() {
 
   it('prints the task list', function(done) {
     runner({ verbose: false })
-      .gulp('--tasks',
+      .gulp('--tasks', '--sort-tasks',
         '--gulpfile ./test/fixtures/gulpfiles/gulpfile-exports.babel.js')
       .run(cb);
 
-    function cb(err, stdout) {
+    function cb(err, stdout, stderr) {
+      expect(err).toEqual(null);
+      expect(stderr).toEqual('');
       var filepath = path.join(expectedDir, 'tasks-as-exports.txt');
       var expected = fs.readFileSync(filepath, 'utf-8');
       stdout = eraseTime(skipLines(stdout, 2));
       expect(stdout).toEqual(expected);
-      done();
+      done(err);
     }
   });
 
