@@ -69,6 +69,10 @@
     "nyc": "^10.0.0"
   },
   "keywords": [
+    "gulp",
+    "cli",
+    "v4",
+    "gulp4",
     "build",
     "stream",
     "system",
