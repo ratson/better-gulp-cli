@@ -1,6 +1,6 @@
 {
   "name": "better-gulp-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Better command line interface for gulp",
   "repository": "ratson/better-gulp-cli",
   "license": "MIT",
