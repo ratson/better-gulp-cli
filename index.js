@@ -46,7 +46,8 @@ function getModuleName() {
   if (customPackage) {
     return customPackage;
   }
-  const deps = readPkgUp.sync().pkg['devDependencies'] || {};
+  const projectPkg = readPkgUp.sync().pkg || {};
+  const deps = projectPkg['devDependencies'] || {};
   if (deps['gulp-v4']) {
     return 'gulp-v4';
   }
